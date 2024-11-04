@@ -1,47 +1,28 @@
-// import React, { Component } from 'react';
-// import Navbar from './Components/Navbar';
-// import News from './Components/News';
 
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       searchTerm: ''
-//     };
-//   }
 
-//   handleSearch = (term) => {
-//     this.setState({ searchTerm: term });
-//   };
-
-//   render() {
-//     return (
-//       <div>
-//         <Navbar onSearch={this.handleSearch} />
-//         <News searchTerm={this.state.searchTerm} />
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
-
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from './Components/Navbar';
 import News from './Components/News';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-    
-  };
+  
+  
 
   return (
     <div>
-      <Navbar onSearch={handleSearch} />
-      <News searchTerm="cricket"/>
+      <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<News category='general' />} />
+        <Route path="/sports" element={<News key="sports" category='sports' />} />
+        <Route path="/entertainment" element={<News key="entertainment" category='entertainment' />} />
+        <Route path="/cricket" element={<News key="cricket" category='cricket' />} />
+        <Route path="/business" element={<News key="business" category='business' />} />
+        <Route path="/general" element={<News key="general" category='general' />} />
+      </Routes>
+    </Router>
     </div>
   );
 };
